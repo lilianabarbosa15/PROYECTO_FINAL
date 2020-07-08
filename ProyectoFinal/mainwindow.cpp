@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     //HELLO WOORRLS
+        //Prueba2
     ui->setupUi(this);
 }
 
