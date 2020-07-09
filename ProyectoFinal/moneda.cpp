@@ -16,11 +16,13 @@ Moneda::Moneda(int _valor, double radio_moneda, double radio_giro, double x_inic
 
 void Moneda::Aparecer()
 {
+    //Colocando moneda en su posición inicial
     setPos(posX,posY);
 }
 
 void Moneda::Mover()
 {
+    //Actualizando ángulo y posiciones de la moneda
     angulo+=velAngular;
     posX=Xinicial+radioGiro*cos(angulo);
     posY=Yinicial+radioGiro*sin(angulo);
