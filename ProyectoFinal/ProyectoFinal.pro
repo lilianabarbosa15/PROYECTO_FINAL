@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    moneda.cpp
+    moneda.cpp \
+    plataforma.cpp
 
 HEADERS += \
         mainwindow.h \
-    moneda.h
+    moneda.h \
+    plataforma.h
 
 FORMS += \
         mainwindow.ui
