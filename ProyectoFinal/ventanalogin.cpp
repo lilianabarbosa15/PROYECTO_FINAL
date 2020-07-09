@@ -1,13 +1,18 @@
 #include "ventanalogin.h"
 #include "ui_ventanalogin.h"
 #include <fstream>
+#include <QMediaPlaylist>
+#include <QMediaPlayer>
+#include <QUrl>
+
+extern QMediaPlayer *musica;
 
 #include <QDebug> //
 
 VentanaLogin::VentanaLogin(QWidget *parent) : QMainWindow(parent), ui(new Ui::VentanaLogin){
     ui->setupUi(this);
     msgBox.setWindowTitle(" ");
-    msgBox.setWindowIcon(QIcon(":/iconW_nave.png"));
+    msgBox.setWindowIcon(QIcon(":/iconos/iconW_nave.png"));
 }
 
 VentanaLogin::~VentanaLogin() { delete ui; }
@@ -77,7 +82,7 @@ void VentanaLogin::leerArchivo()
     estadoName = false;                 //Supone que el nombre NO está guardado
     estadoPassword = false;             //Supone que la contraseña NO está guardada
     ifstream fichero;                                           //Abre el archivo en modo lectura
-    fichero.open("../ProyectoFinal/PARTIDAS/USUARIOS.txt");         //USUARIOS.txt almacena el nombre y la contraseña de los usuarios
+    fichero.open("../ProyectoFinal/PARTIDAS/USUARIOS.txt");     //USUARIOS.txt almacena el nombre y la contraseña de los usuarios
     if(!fichero.is_open()){                                     //Comprueba que el archivo fue abierto exitosamente
         msgBox.setText("ERROR");
         msgBox.exec();
@@ -110,8 +115,15 @@ void VentanaLogin::registrarUsuario()
 
 void VentanaLogin::cambiarVentana()
 {
+    wM.setGeometry(this->geometry());
     this->close();                  //Cierra Inicio de sesion/ registro
-    wM.show();                      //Muestra ventana de elección de modo de juego
+    wM.setVisible(true);            //Muestra ventana de elección de modo de juego
+
+    QMediaPlaylist *playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/sonidos/nocturnal.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);    //Se genera un loop con la musica de fondo que se desea
+    musica->setPlaylist(playlist);
+    musica->play();
 }
 
 void VentanaLogin::on_actionNombresValidos_triggered()

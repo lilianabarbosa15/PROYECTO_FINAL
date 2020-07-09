@@ -468,11 +468,11 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="iconos.qrc">
-    <normaloff>:/iconW_nave.png</normaloff>:/iconW_nave.png</iconset>
+   <iconset resource="rec.qrc">
+    <normaloff>:/iconos/iconW_nave.png</normaloff>:/iconos/iconW_nave.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="modoMultijugador">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -480,6 +480,12 @@
       <width>188</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>188</width>
+      <height>41</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
@@ -495,7 +501,7 @@
      <string>Multijugador</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="modoIndividual">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -503,6 +509,12 @@
       <width>188</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>188</width>
+      <height>41</height>
+     </size>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
@@ -528,11 +540,41 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuOpciones">
+    <property name="title">
+     <string>Opciones</string>
+    </property>
+    <addaction name="actionSonido"/>
+    <addaction name="actionSobrePersonajes"/>
+   </widget>
+   <addaction name="menuOpciones"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSonido">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="rec.qrc">
+     <normaloff>:/iconos/icon_no_sound.png</normaloff>
+     <normalon>:/iconos/icon_sound.png</normalon>:/iconos/icon_no_sound.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sonido</string>
+   </property>
+  </action>
+  <action name="actionSobrePersonajes">
+   <property name="icon">
+    <iconset resource="rec.qrc">
+     <normaloff>:/iconos/icon_info_personaje.png</normaloff>:/iconos/icon_info_personaje.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sobre personajes</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="iconos.qrc"/>
+  <include location="rec.qrc"/>
  </resources>
  <connections/>
 </ui>

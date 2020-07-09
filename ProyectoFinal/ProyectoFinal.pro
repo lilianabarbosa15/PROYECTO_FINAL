@@ -4,12 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui \
+         multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = ProyectoFinal
-TEMPLATE = app
+CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -37,4 +37,4 @@ FORMS += \
         ventanamodojuego.ui
 
 RESOURCES += \
-    iconos.qrc
+    rec.qrc

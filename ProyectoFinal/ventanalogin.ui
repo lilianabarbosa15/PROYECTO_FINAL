@@ -468,8 +468,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="iconos.qrc">
-    <normaloff>:/iconW_nave.png</normaloff>:/iconW_nave.png</iconset>
+   <iconset theme=":/iconos/iconW_nave.png"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="nuevoUsuario">
@@ -1518,7 +1517,7 @@
    </property>
    <property name="icon">
     <iconset resource="iconos.qrc">
-     <normaloff>:/icon_ID.png</normaloff>:/icon_ID.png</iconset>
+     <normaloff>:/iconos/icon_ID.png</normaloff>:/iconos/icon_ID.png</iconset>
    </property>
    <property name="text">
     <string>Nombres validos</string>
@@ -1530,7 +1529,7 @@
    </property>
    <property name="icon">
     <iconset resource="iconos.qrc">
-     <normaloff>:/icon_password.png</normaloff>:/icon_password.png</iconset>
+     <normaloff>:/iconos/icon_password.png</normaloff>:/iconos/icon_password.png</iconset>
    </property>
    <property name="text">
     <string>Claves validas</string>

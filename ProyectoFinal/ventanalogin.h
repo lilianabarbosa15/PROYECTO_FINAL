@@ -7,9 +7,7 @@
 #include <QIcon>
 using namespace std;
 
-namespace Ui {
-class VentanaLogin;
-}
+namespace Ui { class VentanaLogin; }
 
 class VentanaLogin : public QMainWindow
 {
