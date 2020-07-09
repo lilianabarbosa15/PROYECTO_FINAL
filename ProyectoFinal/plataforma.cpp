@@ -20,6 +20,9 @@ Plataforma::Plataforma(double _ancho, double _alto, double x_inicial, double y_i
 
 void Plataforma::Mover()
 {
+    //Moviendo el cuerpo: se modificará la posición de manera uniforme mientras que contPos no
+    //sobrepase el límite. Si lo supera se cambia la dirección de movimiento y contPos retorna
+    //a su valor inicial (0).
     if(contPos<maxAvance){
         posX+=velX;
         posY+=velY;
