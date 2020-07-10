@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     moneda.cpp \
-    plataforma.cpp
+    plataforma.cpp \
+    meteorito.cpp
 
 HEADERS += \
         mainwindow.h \
     moneda.h \
-    plataforma.h
+    plataforma.h \
+    meteorito.h
 
 FORMS += \
         mainwindow.ui
