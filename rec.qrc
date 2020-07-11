@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/sonidos">
+        <file>nocturnal.mp3</file>
+    </qresource>
+    <qresource prefix="/iconos">
+        <file>icon_no_sound.png</file>
+        <file>icon_password.png</file>
+        <file>icon_sound.png</file>
+        <file>iconW_nave.png</file>
+        <file>icon_history.png</file>
+        <file>icon_ID.png</file>
+        <file>icon_info_instrucciones.png</file>
+        <file>icon_info_personaje.png</file>
+        <file>icon_music.png</file>
+        <file>icon_no_music.png</file>
+    </qresource>
+</RCC>
