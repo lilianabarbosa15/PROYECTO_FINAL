@@ -3,9 +3,11 @@
 
 #include "ventanamodojuego.h"
 #include <QMainWindow>
-#include <QMessageBox>
 #include <QIcon>
 using namespace std;
+
+#include <QMessageBox>
+#include "informacion.h"
 
 namespace Ui { class VentanaLogin; }
 
@@ -27,16 +29,13 @@ private slots:
 private:
     Ui::VentanaLogin *ui;
     string name_ingresado, password_ingresado;
-    string name_fichero, password_fichero;
+    QVector<infoArchivo> informacionU = {};
+    QMessageBox msgBox;
     const char v_evaluar[11] = {'|','/','<','>','*',' ','?','*',':','\\','\"'};
     bool estadoName = false, estadoPassword = false;
-    QMessageBox msgBox;
 
     bool verificarDato();    //Verifica si es valido cada dato ingresado
-    void leerArchivo();      //Busca los datos ingresados por el usuario en un archivo predeterminado
-    void registrarUsuario(); //Registra un nuevo usuario al sistema
     void cambiarVentana();   //Cierra la ventana actual y muestra otra
-
 };
 
 #endif // VENTANALOGIN_H

@@ -1,39 +1,57 @@
 #include "ventanalogin.h"
 #include "ui_ventanalogin.h"
+#include "escritor.h"
 #include <fstream>
-#include <QMediaPlaylist>
-#include <QMediaPlayer>
-#include <QUrl>
 
-extern QMediaPlayer *musica;
+extern infoArchivo infoUsuario;
+extern QVector<infoArchivo> informacionJuego;
 
 #include <QDebug> //
 
-VentanaLogin::VentanaLogin(QWidget *parent) : QMainWindow(parent), ui(new Ui::VentanaLogin){
+VentanaLogin::VentanaLogin(QWidget *parent) : QMainWindow(parent), ui(new Ui::VentanaLogin)
+{
     ui->setupUi(this);
     msgBox.setWindowTitle(" ");
     msgBox.setWindowIcon(QIcon(":/iconos/iconW_nave.png"));
+    informacionU = Escritor().leerArchivo("USUARIOS");  //Se pasan los datos de las contraseñas y los nombres a un vector
 }
 
-VentanaLogin::~VentanaLogin() { delete ui; }
+VentanaLogin::~VentanaLogin()
+{
+    delete ui;
+}
 
 void VentanaLogin::on_nuevoUsuario_clicked()
 {
     name_ingresado = (ui->name->text()).toStdString();
     password_ingresado = (ui->password->text()).toStdString();
-    if(verificarDato()==true){
-        leerArchivo();                                  //Buscar en el archivo los datos ingresados
-        if(estadoName ==false){                         //El nombre no se encontró
-            registrarUsuario();
+
+    if(verificarDato()==true)
+    {
+        estadoName = false;
+        for(int i=0; i<informacionU.size(); i++)
+        {
+            if( informacionU.at(i).string1 == name_ingresado )
+            {
+                estadoName = true;
+                break;
+            }
+        }
+
+        if(estadoName == false)                                 //El nombre no se encontró
+        {
+            Escritor().registrarUsuario(name_ingresado, password_ingresado);
             cambiarVentana();
         }
-        else{
-            msgBox.setText("EL USUARIO YA EXISTE     ");
+        else
+        {
+            msgBox.setText("EL USUARIO YA EXISTE");
             msgBox.exec();
         }
     }
-    else{
-        msgBox.setText("DATOS ERRONEOS     ");
+    else
+    {
+        msgBox.setText("DATOS ERRONEOS");
         msgBox.exec();
     }
 }
@@ -42,16 +60,32 @@ void VentanaLogin::on_existeUsuario_clicked()
 {
     name_ingresado = (ui->name->text()).toStdString();
     password_ingresado = (ui->password->text()).toStdString();
-    if(name_ingresado!="" && password_ingresado!=""){
-        leerArchivo();                                      //Buscar en el archivo los datos ingresados
-        if(estadoName==false || estadoPassword==false){     //El nombre no se encontró
+
+    if(name_ingresado!="" && password_ingresado!="")
+    {
+        for(int i=0; i<informacionU.size(); i++)
+        {
+            estadoName = false;                 //Supone que el nombre NO está guardado
+            estadoPassword = false;             //Supone que la contraseña NO está guardada
+
+            if(name_ingresado == informacionU.at(i).string1)
+            {
+                estadoName = true;
+                if (password_ingresado == informacionU.at(i).string2)
+                    estadoPassword = true;
+                break;
+            }
+        }
+        if(estadoName==false || estadoPassword==false)
+        {
             msgBox.setText("LA CUENTA O LA CONTRASEÑA ES INCORRECTA");
             msgBox.exec();
         }
         else
             cambiarVentana();
     }
-    else{
+    else
+    {
         msgBox.setText("SE DEBEN COMPLETAR LOS ESPACIOS");
         msgBox.exec();
     }
@@ -59,71 +93,37 @@ void VentanaLogin::on_existeUsuario_clicked()
 
 bool VentanaLogin::verificarDato()
 {
-    if(password_ingresado!="" && name_ingresado!=""){
-        //Verifica nombre
-        for(unsigned short int v=0; v< sizeof(v_evaluar); v++){
-            for(unsigned int n=0; n<name_ingresado.size(); n++){
+    if(password_ingresado!="" && name_ingresado!="")
+    {
+        for(unsigned short int v=0; v< sizeof(v_evaluar); v++)  //Verifica nombre
+        {
+            for(unsigned int n=0; n<name_ingresado.size(); n++)
+            {
                 if(*(v_evaluar+v) == name_ingresado.at(n))
                     return false;                                   //Uno de los caracteres del nombre ingresado no es valido
             }
         }
-        //Verifica contraseña
-        for(unsigned int c=0; c<password_ingresado.size(); c++){
+        for(unsigned int c=0; c<password_ingresado.size(); c++) //Verifica contraseña
+        {
             if(password_ingresado.at(c)==' ')
                 return false;                                       //La contraseña contiene espacios
         }
-    }else
+    }
+    else
         return false;                                               //No se ingresaron datos
     return true;                                                    //Nombre correcto
 }
 
-void VentanaLogin::leerArchivo()
-{
-    estadoName = false;                 //Supone que el nombre NO está guardado
-    estadoPassword = false;             //Supone que la contraseña NO está guardada
-    ifstream fichero;                                           //Abre el archivo en modo lectura
-    fichero.open("../ProyectoFinal/PARTIDAS/USUARIOS.txt");     //USUARIOS.txt almacena el nombre y la contraseña de los usuarios
-    if(!fichero.is_open()){                                     //Comprueba que el archivo fue abierto exitosamente
-        msgBox.setText("ERROR");
-        msgBox.exec();
-        exit(1);
-    }
-    while(!fichero.eof()){                                       //Itera mientras que no se haya llegado al final del archivo
-        fichero >> name_fichero;
-        fichero >> password_fichero;
-        if(name_ingresado == name_fichero){
-            estadoName = true;
-            if (password_ingresado == password_fichero)
-                estadoPassword = true;
-            break;
-        }
-    }
-    fichero.close();                                             //Se cierra el archivo
-}
-
-void VentanaLogin::registrarUsuario()
-{
-    //Guarda los datos ingresados en el archivo predeterminado de usuarios
-    ofstream fichero;
-    fichero.open("../ProyectoFinal/PARTIDAS/USUARIOS.txt",ios::app);
-    fichero << endl << name_ingresado << "\t" << password_ingresado;
-    fichero.close();
-    //Genera un archivo nuevo para el usuario
-    ofstream streamEscritura("../ProyectoFinal/PARTIDAS/"+name_ingresado+"_usu.txt");
-    streamEscritura.close();
-}
-
 void VentanaLogin::cambiarVentana()
 {
+    infoUsuario.string2 = name_ingresado;
+    informacionJuego = Escritor().leerArchivo(infoUsuario.string2 + "_usu");
+    qDebug() << "Usted se encuentra en " << infoUsuario.string2.c_str() << "_usu.txt";
+
     wM.setGeometry(this->geometry());
     this->close();                  //Cierra Inicio de sesion/ registro
     wM.setVisible(true);            //Muestra ventana de elección de modo de juego
 
-    QMediaPlaylist *playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/sonidos/nocturnal.mp3"));
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);    //Se genera un loop con la musica de fondo que se desea
-    musica->setPlaylist(playlist);
-    musica->play();
 }
 
 void VentanaLogin::on_actionNombresValidos_triggered()

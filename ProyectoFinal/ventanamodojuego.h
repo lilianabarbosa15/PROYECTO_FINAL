@@ -2,10 +2,9 @@
 #define VENTANAMODOJUEGO_H
 
 #include <QMainWindow>
+#include "ventanaseleccionjuego.h"
 
-namespace Ui {
-class VentanaModoJuego;
-}
+namespace Ui { class VentanaModoJuego; }
 
 class VentanaModoJuego : public QMainWindow
 {
@@ -14,15 +13,17 @@ class VentanaModoJuego : public QMainWindow
 public:
     explicit VentanaModoJuego(QWidget *parent = nullptr);
     ~VentanaModoJuego();
+    VentanaSeleccionJuego wS;
 
 private slots:
-    void on_actionSonido_triggered();
     void on_actionSobrePersonajes_triggered();
     void on_modoMultijugador_clicked();
     void on_modoIndividual_clicked();
 
 private:
     Ui::VentanaModoJuego *ui;
+
+    void cambiarVentana();
 };
 
 #endif // VENTANAMODOJUEGO_H

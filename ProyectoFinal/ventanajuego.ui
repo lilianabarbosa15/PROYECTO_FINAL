@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>VentanaModoJuego</class>
- <widget class="QMainWindow" name="VentanaModoJuego">
+ <class>VentanaJuego</class>
+ <widget class="QMainWindow" name="VentanaJuego">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -468,29 +468,29 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="rec.qrc">
     <normaloff>:/iconos/iconW_nave.png</normaloff>:/iconos/iconW_nave.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="modoMultijugador">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>360</y>
+      <y>420</y>
       <width>188</width>
-      <height>41</height>
+      <height>40</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
       <width>188</width>
-      <height>41</height>
+      <height>40</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
       <width>188</width>
-      <height>41</height>
+      <height>40</height>
      </size>
     </property>
     <property name="styleSheet">
@@ -504,22 +504,38 @@
 }</string>
     </property>
     <property name="text">
-     <string>Multijugador</string>
+     <string>Jugar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="modoIndividual">
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>680</width>
+      <height>400</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>360</y>
+      <y>420</y>
       <width>188</width>
-      <height>41</height>
+      <height>40</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
       <width>188</width>
-      <height>41</height>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>188</width>
+      <height>40</height>
      </size>
     </property>
     <property name="styleSheet">
@@ -533,7 +549,7 @@
 }</string>
     </property>
     <property name="text">
-     <string>Individual</string>
+     <string>Pausar</string>
     </property>
    </widget>
   </widget>
@@ -550,21 +566,71 @@
     <property name="title">
      <string>Opciones</string>
     </property>
+    <addaction name="actionMusica"/>
+    <addaction name="actionSonidos"/>
     <addaction name="actionSobrePersonajes"/>
+    <addaction name="actionHistoria"/>
+    <addaction name="actionInstrucciones"/>
    </widget>
    <addaction name="menuOpciones"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionMusica">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="rec.qrc">
+     <normaloff>:/iconos/icon_no_music.png</normaloff>
+     <normalon>:/iconos/icon_music.png</normalon>:/iconos/icon_no_music.png</iconset>
+   </property>
+   <property name="text">
+    <string>Musica</string>
+   </property>
+  </action>
+  <action name="actionSonidos">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="rec.qrc">
+     <normaloff>:/iconos/icon_no_sound.png</normaloff>
+     <normalon>:/iconos/icon_sound.png</normalon>:/iconos/icon_no_sound.png</iconset>
+   </property>
+   <property name="text">
+    <string>Efectos de sonido</string>
+   </property>
+  </action>
   <action name="actionSobrePersonajes">
    <property name="icon">
-    <iconset>
+    <iconset resource="rec.qrc">
      <normaloff>:/iconos/icon_info_personaje.png</normaloff>:/iconos/icon_info_personaje.png</iconset>
    </property>
    <property name="text">
     <string>Sobre personajes</string>
    </property>
   </action>
+  <action name="actionHistoria">
+   <property name="icon">
+    <iconset resource="rec.qrc">
+     <normaloff>:/iconos/icon_history.png</normaloff>:/iconos/icon_history.png</iconset>
+   </property>
+   <property name="text">
+    <string>Historia</string>
+   </property>
+  </action>
+  <action name="actionInstrucciones">
+   <property name="icon">
+    <iconset resource="rec.qrc">
+     <normaloff>:/iconos/icon_info_instrucciones.png</normaloff>:/iconos/icon_info_instrucciones.png</iconset>
+   </property>
+   <property name="text">
+    <string>Instrucciones</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="rec.qrc"/>
+ </resources>
  <connections/>
 </ui>

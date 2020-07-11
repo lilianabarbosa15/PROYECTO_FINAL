@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>VentanaModoJuego</class>
- <widget class="QMainWindow" name="VentanaModoJuego">
+ <class>VentanaSeleccionJuego</class>
+ <widget class="QMainWindow" name="VentanaSeleccionJuego">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -467,12 +467,8 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/iconos/iconW_nave.png</normaloff>:/iconos/iconW_nave.png</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="modoMultijugador">
+   <widget class="QPushButton" name="reiniciarJuego">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -504,10 +500,10 @@
 }</string>
     </property>
     <property name="text">
-     <string>Multijugador</string>
+     <string>Reiniciar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="modoIndividual">
+   <widget class="QPushButton" name="retomarJuego">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -517,6 +513,12 @@
      </rect>
     </property>
     <property name="minimumSize">
+     <size>
+      <width>188</width>
+      <height>41</height>
+     </size>
+    </property>
+    <property name="maximumSize">
      <size>
       <width>188</width>
       <height>41</height>
@@ -533,7 +535,7 @@
 }</string>
     </property>
     <property name="text">
-     <string>Individual</string>
+     <string>Retomar juego</string>
     </property>
    </widget>
   </widget>

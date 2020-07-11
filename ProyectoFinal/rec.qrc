@@ -11,5 +11,7 @@
         <file>icon_ID.png</file>
         <file>icon_info_instrucciones.png</file>
         <file>icon_info_personaje.png</file>
+        <file>icon_music.png</file>
+        <file>icon_no_music.png</file>
     </qresource>
 </RCC>

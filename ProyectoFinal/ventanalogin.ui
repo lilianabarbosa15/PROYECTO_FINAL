@@ -468,7 +468,8 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset theme=":/iconos/iconW_nave.png"/>
+   <iconset>
+    <normaloff>iconW_nave.png</normaloff>iconW_nave.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="nuevoUsuario">
@@ -1490,6 +1491,9 @@
       <height>30</height>
      </rect>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1516,7 +1520,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="iconos.qrc">
+    <iconset resource="rec.qrc">
      <normaloff>:/iconos/icon_ID.png</normaloff>:/iconos/icon_ID.png</iconset>
    </property>
    <property name="text">
@@ -1528,7 +1532,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="iconos.qrc">
+    <iconset resource="rec.qrc">
      <normaloff>:/iconos/icon_password.png</normaloff>:/iconos/icon_password.png</iconset>
    </property>
    <property name="text">
@@ -1540,7 +1544,7 @@
   <tabstop>nuevoUsuario</tabstop>
  </tabstops>
  <resources>
-  <include location="iconos.qrc"/>
+  <include location="rec.qrc"/>
  </resources>
  <connections/>
 </ui>
