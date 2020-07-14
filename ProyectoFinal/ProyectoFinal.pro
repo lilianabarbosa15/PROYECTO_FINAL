@@ -27,22 +27,12 @@ SOURCES += \
         escritor.cpp \
         main.cpp \
         moneda.cpp \
-        ventanajuego.cpp \
-        ventanalogin.cpp \
-        ventanamodojuego.cpp \
-        ventanaseleccionjuego.cpp \
         plataforma.cpp \
         meteorito.cpp
     
 
 HEADERS += \
-        escritor.h \
         moneda.h \
-        informacion.h \
-        ventanajuego.h \
-        ventanalogin.h \
-        ventanamodojuego.h \
-        ventanaseleccionjuego.h \
         plataforma.h \
         meteorito.h
 
