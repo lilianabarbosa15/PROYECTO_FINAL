@@ -28,13 +28,23 @@ SOURCES += \
         main.cpp \
         moneda.cpp \
         plataforma.cpp \
-        meteorito.cpp
+        meteorito.cpp \
+        ventanajuego.cpp \
+        ventanalogin.cpp \
+        ventanamodojuego.cpp \
+        ventanaseleccionjuego.cpp
     
 
 HEADERS += \
+        escritor.h \
         moneda.h \
         plataforma.h \
-        meteorito.h
+        meteorito.h \
+        informacion.h \
+        ventanajuego.h \
+        ventanalogin.h \
+        ventanamodojuego.h \
+        ventanaseleccionjuego.h
 
 FORMS += \
         ventanajuego.ui \
