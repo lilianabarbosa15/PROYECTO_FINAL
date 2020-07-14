@@ -26,18 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         escritor.cpp \
         main.cpp \
-        ventanajuego.cpp \
-        ventanalogin.cpp \
-        ventanamodojuego.cpp \
-        ventanaseleccionjuego.cpp
+        moneda.cpp \
+        plataforma.cpp \
+        meteorito.cpp
+    
 
 HEADERS += \
-        escritor.h \
-        informacion.h \
-        ventanajuego.h \
-        ventanalogin.h \
-        ventanamodojuego.h \
-        ventanaseleccionjuego.h
+        moneda.h \
+        plataforma.h \
+        meteorito.h
 
 FORMS += \
         ventanajuego.ui \
