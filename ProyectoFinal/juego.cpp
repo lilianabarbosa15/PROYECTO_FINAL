@@ -122,7 +122,7 @@ void Juego::actualizar()
         if(contTime%50==0)
             NuevosObstaculos();
 
-        for(int tipo_e=0; tipo_e<EnemEstaticos.size(); tipo_e++){ //Hacer que enemigos en plataformas dispares.
+        for(int tipo_e=0; tipo_e<EnemEstaticos.size(); tipo_e++){ //Hacer que enemigos en plataformas disparen.
             if(juego->EnemEstaticos.at(tipo_e)->vivo==true && contTime%30==0)
                 EnemEstaticos.at(tipo_e)->disparar();
         }
@@ -323,7 +323,7 @@ void Juego::AumentarPuntaje()
 
 void Juego::NuevosObstaculos()
 {
-    //Método que agrega obstáculos al azar según el nivel.
+    //Método que agrega obstáculos que caen al azar según el nivel.
     if(juego->getNivel()==1){ //Agrega meteoritos que caen con una velocidad inicial y en ángulo de 3Pi/2.
         meteoritos.push_back(new Meteorito(0,9,(rand() % 650 + 10),0,20));
         escena->addItem(meteoritos.back());

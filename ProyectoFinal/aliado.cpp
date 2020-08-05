@@ -115,7 +115,7 @@ void Aliado::moverY(unsigned short tipo)    //SOLO SE USA EN EL NIVEL 1
         verificarMovimiento();
     }
     else{
-        Vy=-2.5*Gravedad*tiempo;    //Le puse un x2.5 para que caiga más rápido
+        Vy=-2.5*Gravedad*tiempo;    //2.5 para que caiga más rápido
         posicion_y-=Vy*tiempo-(0.5*Gravedad*tiempo*tiempo);
         verificarMovimiento();
     }

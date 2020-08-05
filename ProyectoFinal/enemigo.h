@@ -9,7 +9,7 @@
 #include "meteorito.h"
 #include "bala.h"
 
-class Enemigo: public cuerpo, public QGraphicsPixmapItem //public QGraphicsRectItem
+class Enemigo: public cuerpo, public QGraphicsPixmapItem
 {
 public:
     Enemigo(unsigned int tipo, unsigned short int tipo_b, unsigned short int life, int posX, int posY, int posX_arma, int posY_arma, int pos_inicialX, int pos_inicialY, float vel, float a, float theta_disparo, int radio_bala, float vel_bala);

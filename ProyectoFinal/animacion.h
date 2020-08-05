@@ -51,7 +51,7 @@ private:
     bool activado=false;
      //Atributos para animación gravitacional:
     QTimer *timer;
-    int dt=1;   //Velocidad de los cuerpos en orbita
+    int dt=1;   //Velocidad de ejecución del slot que calcula la posición de los cuerpos en órbita.
      //Cuerpos a animar: Revisar datos para mejor animación.
 
 public:

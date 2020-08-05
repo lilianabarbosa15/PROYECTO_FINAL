@@ -100,6 +100,7 @@ bool Enemigo::ColisionBala()
     /*
      Método que verifica si el enemigo ha chocado con una bala lanzada por el jugador.
      De ser así retorna true y de lo contrario retorna false.
+     Adicionalmente, se elimina la bala de la escena antes de retornar true.
     */
     QList<QGraphicsItem*>Colision=collidingItems();
     for(int i=0; i<Colision.size();i++){

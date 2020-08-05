@@ -33,6 +33,7 @@ QVector<infoArchivo> Escritor::leerArchivo(string nombre_archivo)
 
 void Escritor::registrarUsuario(string name_ingresado, string password_ingresado)
 {
+    //Método utilizado cuando el usuario es nuevo en el sistema.
     //Guarda los datos ingresados en el archivo predeterminado de usuarios
     ofstream fichero;
     fichero.open("../ProyectoFinal/PARTIDAS/USUARIOS.txt",ios::app);
@@ -62,7 +63,7 @@ void Escritor::guardarPartida(QVector<infoArchivo> infoJuego)
         fichero << endl << infoJuego.at(i).string1  //Indica el modo de juego
                 << "\t" << infoJuego.at(i).string2  //Nombre del usuario
                 << "\t" << infoJuego.at(i).int1     //Puntaje de la partida en curso
-                << "\t" << infoJuego.at(i).int2;    //Nivel en el que se encuentra
+                << "\t" << infoJuego.at(i).int2;    //Localización en la que se encuentra
     }
     fichero.close();                                             //Se cierra el archivo
 }
@@ -90,6 +91,14 @@ void Escritor::actualizarInformacion(QVector<infoArchivo> infoNueva)
 
 void Escritor::actualizarInfoLocal()
 {
+    /*
+      Método que asigna el localizador a la estructura asociada al usuario en el momento de iniciar una partida.
+      Donde el indicador corresponde a <M> (multijugador) e <I> (individual).
+      Posteriormente, se agregan a la información general del juego, que corresponde a un vector de la estructura
+      que se modificó.
+      El formato de guardado es el siguiente:
+      <indicador>    nombreUsuario   puntajeAcumulado   localizador
+    */
     if(juego->multijugador==true){
         infoUsuario.string1 = "<M>";
         informacionJuego.replace(0,infoUsuario);
@@ -103,6 +112,10 @@ void Escritor::actualizarInfoLocal()
 
 void Escritor::actualizarInfoGeneral()
 {
+    /*Método que obtiene todos los nombres y contraseñas de los usuarios en el sistema, junto a sus máximos puntajes
+    en cada modo de juego, además de alterar la información del usuario en curso (solamente se alteran los puntajes
+    en cada modo de juego).
+    */
     infoArchivo nuevaInfo = infoUsuario;
     NuevainformacionU = Escritor().leerArchivo("USUARIOS");  //Se pasan los datos de las contraseñas y los nombres a un vector
     infoUsuario = nuevaInfo;

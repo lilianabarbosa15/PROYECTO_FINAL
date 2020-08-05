@@ -2,6 +2,15 @@
 #define ESCRITOR_H
 /*
  Clase usada para el manejo de archivos.
+ Los archivos se encuentran organizados de la siguiente manera:
+ -Archivos para cada usuario:
+ <indicador>    NombreUsuario   puntajeAcumulado    localización
+ <indicador>: puede ser multijugador (<M>) o individual (<I>)
+ localización: va desde 0 a 6, aunque puede alterarse al 8 (caso especial no usado en esta clase)
+ -USUARIOS.txt:
+ NombreUsuario  contraseña  puntajeMayorMultijugador    puntajeMayorIndividual
+
+ Estos archivos se encuentran dentro de la carpeta PARTIDAS
 */
 #include <QList>
 #include <QMessageBox>

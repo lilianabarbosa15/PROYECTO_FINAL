@@ -2,7 +2,10 @@
 #define JUEGO_H
 
 /*
- * Clase usa para el manejo de los elementos del juego.
+ * Clase usada para el manejo de los elementos del juego.
+    Nota sobre la diferencia entre localización y nivel:
+    localización se refiere a todos los puntos del juego, ya sea la historia, el nivel o los puntajes finales.
+    Nivel se refiere únicamente a la sección donde el usuario interactúa mediante el manejo de los personajes con el programa.
 */
 
 #include <QGraphicsRectItem>

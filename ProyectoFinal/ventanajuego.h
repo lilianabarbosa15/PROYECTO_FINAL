@@ -1,6 +1,7 @@
 #ifndef VENTANAJUEGO_H
 #define VENTANAJUEGO_H
-//Ventana en la que se presentarán los niveles.
+//Ventana en la que se presentarán los niveles y se recibirán las teclas presionadas por el usuario (depende de la localización en
+//la que se encuentre en el juego).
 
 #include <QLabel>
 #include <QDialog>
@@ -41,7 +42,7 @@ private slots:
 private:
     Ui::VentanaJuego *ui;
     QSet<int> pressedKeys;                  //Para el filtrado de eventos
-    float dt = 15;                          //Rapidez con la que se ejecutan los saltos
+    float dt = 15;                          //Rapidez con la que se ejecuta el slot actualizar()
     bool estado = false;                    //Determina si se leen las letras presionadas o no
     QMediaPlayer *musica = new QMediaPlayer();
     QMediaPlaylist *playlist = new QMediaPlaylist();
