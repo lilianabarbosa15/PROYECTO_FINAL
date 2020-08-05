@@ -1,6 +1,8 @@
 #ifndef ALIADO_H
 #define ALIADO_H
 
+//Clase para creación de los jugadores de todos los niveles. Hereda, junto con enemigo, de la clase cuerpo.
+
 #include <QGraphicsPixmapItem>
 #include <QGraphicsRectItem>
 #include <QMediaPlayer>
