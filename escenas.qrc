@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/primera">
+        <file>Elementos juego/Spaceport_.jpg</file>
+        <file>Elementos juego/Platform.png</file>
+        <file>Elementos juego/Star2.png</file>
+        <file>Elementos juego/Star1.png</file>
+        <file>Elementos juego/Meteorite.png</file>
+    </qresource>
+    <qresource prefix="/segunda">
+        <file>Elementos juego/DisparoNaveA.png</file>
+        <file>Elementos juego/Space.jpg</file>
+        <file>Elementos juego/DisparoNaveEnemiga.png</file>
+        <file>Elementos juego/Star3.png</file>
+    </qresource>
+    <qresource prefix="/tercera">
+        <file>Elementos juego/Newplanet.jpg</file>
+        <file>Elementos juego/Disparo_2_Enemigo.png</file>
+        <file>Elementos juego/DisparoAliado.png</file>
+        <file>Elementos juego/DisparoEnemigo.png</file>
+        <file>Elementos juego/Platform3.png</file>
+    </qresource>
+    <qresource prefix="/final">
+        <file>Informacion/puntajes.jpg</file>
+    </qresource>
+</RCC>
