@@ -1,7 +1,7 @@
 #ifndef ALIADO_H
 #define ALIADO_H
 
-
+//Comentario ejemplo
 #include <QGraphicsPixmapItem>
 #include <QGraphicsRectItem>
 #include <QMediaPlayer>
