@@ -23,6 +23,7 @@ VentanaSeleccionJuego::~VentanaSeleccionJuego()
 
 void VentanaSeleccionJuego::on_actionSobrePersonajes_triggered()
 {
+    //Mostrar información de los personajes de la historia.
     QDialog *dialog = new QDialog();
     dialog->setWindowIcon(QIcon(":/iconos/Iconos/iconW_nave.png"));
     dialog->setWindowTitle("Players information");
@@ -40,6 +41,7 @@ void VentanaSeleccionJuego::on_actionSobrePersonajes_triggered()
 
 void VentanaSeleccionJuego::on_reiniciarJuego_clicked()
 {
+    //Opción reiniciar juego: El registro del nivel del usuario retornará al inicio(localización 0).
     infoUsuario.int1 = 0;
     infoUsuario.int2 = 0;
 
@@ -54,6 +56,7 @@ void VentanaSeleccionJuego::on_reiniciarJuego_clicked()
 
 void VentanaSeleccionJuego::on_retomarJuego_clicked()
 {
+    //Opción continuar juego: se cargará el nivel de la ubicación guardada en el archivo del usuario.
     if(infoUsuario.string1 == "<M>"){
         infoUsuario.int1 = informacionJuego.at(0).int1;
         infoUsuario.int2 = informacionJuego.at(0).int2;
@@ -67,6 +70,7 @@ void VentanaSeleccionJuego::on_retomarJuego_clicked()
 
 void VentanaSeleccionJuego::cambiarVentana()
 {
+    //Cambio de ventana a ventana del juego.
     wJ.setGeometry(this->geometry());
     this->close();                  //Cierra ventana de elección de la partida de juego
     wJ.setVisible(true);            //Muestra ventana de juego

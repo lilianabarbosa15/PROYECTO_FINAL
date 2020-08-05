@@ -1,6 +1,6 @@
 #ifndef VENTANASELECCIONJUEGO_H
 #define VENTANASELECCIONJUEGO_H
-
+//Ventana de selección de tipo de continuación (reiniciar juego o reanudar)
 #include <QMainWindow>
 #include <QLabel>
 #include "ventanajuego.h"
