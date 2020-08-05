@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/aliado">
+        <file>Elementos juego/Astronaut_Gun_02.png</file>
+        <file>Elementos juego/Astronaut_Left_01.png</file>
+        <file>Elementos juego/Astronaut_Left_02.png</file>
+        <file>Elementos juego/Astronaut_Right_01.png</file>
+        <file>Elementos juego/Astronaut_Right_02.png</file>
+        <file>Elementos juego/Astronaut_Gun_01.png</file>
+        <file>Elementos juego/Spaceship_01.png</file>
+        <file>Elementos juego/Spaceship_02.png</file>
+    </qresource>
+    <qresource prefix="/Enemigo">
+        <file>Elementos juego/Alien_G_DL.png</file>
+        <file>Elementos juego/Alien_G_DR.png</file>
+        <file>Elementos juego/Alien_G_L.png</file>
+        <file>Elementos juego/Alien_G_R.png</file>
+        <file>Elementos juego/SpaceshipE.png</file>
+    </qresource>
+</RCC>
