@@ -49,6 +49,7 @@ QRectF Moneda::boundingRect() const
 
 void Moneda::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    //Dibujar moneda según el tipo y con tamaño definido por boundingRect().
     painter->drawPixmap(boundingRect(),apariencia,apariencia.rect());
 }
 
@@ -74,6 +75,12 @@ void Moneda::setInScene(bool value)
 
 void Moneda::AumentarPuntaje(unsigned int E, unsigned short int tipoaliado)
 {
+    /*
+     * Método que determina si el aliado o su disparo colisiona con una moneda y aumenta el puntaje de nivel
+     * del juego según el valor de la moneda.
+     * Además, si la moneda es de tipo 0 (moneda de cambio de nivel en nivel 1) entonces se declara el nivel como superado.
+     *
+    */
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for(int i=0, n=colliding_items.size(); i<n; i++){
         if(typeid(*(colliding_items[i]))==typeid(Aliado)){

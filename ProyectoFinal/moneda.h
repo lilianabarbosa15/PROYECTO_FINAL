@@ -19,6 +19,8 @@ class Moneda: public QGraphicsItem
      que se recomienda definir entre el intervalo (0,2*pi) (intervalo abierto).
      Si la velocidad angular se define positiva, entonces la moneda girará en sentido horario
      de lo contrario girará el sentido antihorario.
+
+     La moneda permanecerá en escena durante un tiempo definido por el atributo "tiempo"
     */
 private:
     int valor=0, tiempo=0;
