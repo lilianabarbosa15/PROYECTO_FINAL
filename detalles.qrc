@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/V1">
-        <file>Fondos/ModoJuego.jpg</file>
-        <file>Fondos/SeleccionJuego.jpg</file>
-    </qresource>
-</RCC>
