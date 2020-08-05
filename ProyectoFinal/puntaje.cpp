@@ -2,7 +2,7 @@
 #include "escritor.h"
 
 #include <QGraphicsScene>
-#include <QDebug> //
+#include <QDebug>
 
 extern QGraphicsScene *escena;
 
@@ -17,6 +17,7 @@ Puntaje::Puntaje()
 
 void Puntaje::calculoPuntajes()
 {
+    //Método que obtiene y almacena todos los puntajes de los usuarios.
     infoArchivoUsuarios = Escritor().leerArchivo("USUARIOS");
     for(unsigned int i=0; i<(unsigned)infoArchivoUsuarios.size(); i++){
         formatoPuntaje.nombre = infoArchivoUsuarios.at(i).string1;
@@ -73,6 +74,7 @@ void Puntaje::ordenarPuntajes()
 
 void Puntaje::dibujarPuntajes()
 {
+    //Método que imprime los puntajes en la escena.
     font.setPixelSize(35);
     font.setBold(false);
     font.setFamily("Calibri");
