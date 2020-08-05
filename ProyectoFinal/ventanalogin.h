@@ -27,6 +27,10 @@ private slots:
     void on_actionClavesValidas_triggered();
 
 private:
+    bool verificarDato();    //Verifica si es valido cada dato ingresado
+    void cambiarVentana();   //Cierra la ventana actual y muestra otra
+
+private:
     Ui::VentanaLogin *ui;
     string name_ingresado, password_ingresado;
     QVector<infoArchivo> informacionU = {};
@@ -34,8 +38,6 @@ private:
     const char v_evaluar[11] = {'|','/','<','>','*',' ','?','*',':','\\','\"'};
     bool estadoName = false, estadoPassword = false;
 
-    bool verificarDato();    //Verifica si es valido cada dato ingresado
-    void cambiarVentana();   //Cierra la ventana actual y muestra otra
 };
 
 #endif // VENTANALOGIN_H

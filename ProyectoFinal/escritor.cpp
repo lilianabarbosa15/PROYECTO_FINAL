@@ -5,6 +5,8 @@
 extern infoArchivo infoUsuario;
 
 #include <QDebug>   //
+#include "juego.h"
+extern Juego *juego;
 
 QVector<infoArchivo> Escritor::leerArchivo(string nombre_archivo)
 {
@@ -63,4 +65,68 @@ void Escritor::guardarPartida(QVector<infoArchivo> infoJuego)
                 << "\t" << infoJuego.at(i).int2;    //Nivel en el que se encuentra
     }
     fichero.close();                                             //Se cierra el archivo
+}
+
+void Escritor::actualizarInformacion(QVector<infoArchivo> infoNueva)
+{
+    ofstream fichero;                                                               //Abre el archivo en modo lectura
+    fichero.open("../ProyectoFinal/PARTIDAS/USUARIOS.txt");
+    if(!fichero.is_open()){                                                         //Comprueba que el archivo fue abierto exitosamente
+        msgBox.setWindowTitle(" ");
+        msgBox.setWindowIcon(QIcon(":/iconos/iconW_nave.png"));
+        msgBox.setText("ERROR");
+        msgBox.exec();
+        exit(1);
+    }
+    for(unsigned short int i=0; i<infoNueva.size(); i++)
+    {
+        fichero << endl << infoNueva.at(i).string1  //Indica el nombre del usuario
+                << "\t" << infoNueva.at(i).string2  //La contraseña del usuario
+                << "\t" << infoNueva.at(i).int1     //Puntaje máximo en modo multijugador
+                << "\t" << infoNueva.at(i).int2;    //Puntaje máximo en modo individual
+    }
+    fichero.close();                                             //Se cierra el archivo
+}
+
+void Escritor::actualizarInfoLocal()
+{
+    if(juego->multijugador==true){
+        infoUsuario.string1 = "<M>";
+        informacionJuego.replace(0,infoUsuario);
+    }
+    else{
+        infoUsuario.string1 = "<I>";
+        informacionJuego.replace(1,infoUsuario);
+    }
+    Escritor().guardarPartida(informacionJuego);
+}
+
+void Escritor::actualizarInfoGeneral()
+{
+    infoArchivo nuevaInfo = infoUsuario;
+    NuevainformacionU = Escritor().leerArchivo("USUARIOS");  //Se pasan los datos de las contraseñas y los nombres a un vector
+    infoUsuario = nuevaInfo;
+    nuevaInfo = {};
+    for(int i=0; i<NuevainformacionU.size(); i++){
+        if( NuevainformacionU.at(i).string1 == infoUsuario.string2 ){
+            nuevaInfo.string1 = NuevainformacionU.at(i).string1;        //Nombre del usuario
+            nuevaInfo.string2 = NuevainformacionU.at(i).string2;        //Contraseña del usuario
+            if(juego->multijugador==true){
+                if( NuevainformacionU.at(i).int1 < infoUsuario.int1){
+                    nuevaInfo.int1 = infoUsuario.int1;               //Nuevo mayor puntaje en modo multijugador
+                    nuevaInfo.int2 = NuevainformacionU.at(i).int2;              //Puntaje en modo individual
+                    NuevainformacionU.replace(i, nuevaInfo);
+                    Escritor().actualizarInformacion(NuevainformacionU);
+                }
+            }else{
+                if( NuevainformacionU.at(i).int2 < infoUsuario.int1){
+                    nuevaInfo.int1 = NuevainformacionU.at(i).int1;              //Puntaje en modo individual
+                    nuevaInfo.int2 = infoUsuario.int1;               //Nuevo mayor puntaje en modo multijugador
+                    NuevainformacionU.replace(i, nuevaInfo);
+                    Escritor().actualizarInformacion(NuevainformacionU);
+                }
+            }
+            break;
+        }
+    }
 }

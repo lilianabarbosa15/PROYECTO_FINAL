@@ -1,20 +1,19 @@
 #include "ventanaseleccionjuego.h"
 #include "ui_ventanaseleccionjuego.h"
-#include <QMediaPlayer>
+#include "juego.h"
 #include <QDialog>
 
 #include <escritor.h>
 extern infoArchivo infoUsuario;
 extern QVector<infoArchivo> informacionJuego;
 
-#include <QMediaPlaylist>
-#include <QUrl>
-extern QMediaPlayer *musica;
+extern QGraphicsScene *escena;  //Para dibujar la escena del juego en la que se encuentra el personaje
+extern Juego *juego;
 
 VentanaSeleccionJuego::VentanaSeleccionJuego(QWidget *parent) : QMainWindow(parent),  ui(new Ui::VentanaSeleccionJuego)
 {
     ui->setupUi(this);
-    this->setWindowIcon(QIcon(":/iconos/iconW_nave.png"));
+    this->setWindowIcon(QIcon(":/iconos/Iconos/iconW_nave.png"));
 }
 
 VentanaSeleccionJuego::~VentanaSeleccionJuego()
@@ -24,15 +23,16 @@ VentanaSeleccionJuego::~VentanaSeleccionJuego()
 
 void VentanaSeleccionJuego::on_actionSobrePersonajes_triggered()
 {
-    QDialog *dialog = new QDialog;
-    dialog->setWindowIcon(QIcon(":/iconos/iconW_nave.png"));
-    dialog->setWindowTitle("Información de personajes");
-    dialog->setGeometry(this->x(),this->y(),200,200);
+    QDialog *dialog = new QDialog();
+    dialog->setWindowIcon(QIcon(":/iconos/Iconos/iconW_nave.png"));
+    dialog->setWindowTitle("Players information");
+    dialog->setGeometry(this->x(),this->y(),500,500);
+    dialog->setFixedSize(500,500);
+    dialog->setStyleSheet("background-color:black;");
+    dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-                                /*
-                                FALTA CUADRARLO PARA PONERLE LA IMAGEN CORRESPONDIENTE
-                                A LA INFORMACIÓN DE LOS PERSONAJES.
-                                */
+    QLabel *label = new QLabel(dialog);
+    label->setPixmap(QPixmap(":/info/Informacion/Personajes_Desc_.jpg").scaled(500,500));
 
     dialog->setModal(true);
     dialog->setVisible(true);
@@ -54,13 +54,11 @@ void VentanaSeleccionJuego::on_reiniciarJuego_clicked()
 
 void VentanaSeleccionJuego::on_retomarJuego_clicked()
 {
-    if(infoUsuario.string1 == "<M>")
-    {
+    if(infoUsuario.string1 == "<M>"){
         infoUsuario.int1 = informacionJuego.at(0).int1;
         infoUsuario.int2 = informacionJuego.at(0).int2;
     }
-    else
-    {
+    else{
         infoUsuario.int1 = informacionJuego.at(1).int1;
         infoUsuario.int2 = informacionJuego.at(1).int2;
     }
@@ -69,20 +67,9 @@ void VentanaSeleccionJuego::on_retomarJuego_clicked()
 
 void VentanaSeleccionJuego::cambiarVentana()
 {
-    for(unsigned short int n=0; n<informacionJuego.size(); n++)
-    {
-        qDebug() << informacionJuego.at(n).string1.c_str()          //Indica el modo de juego
-                 << "\t" << informacionJuego.at(n).string2.c_str()  //Nombre del usuario
-                 << "\t" << informacionJuego.at(n).int1             //Puntaje de la partida en curso
-                 << "\t" << informacionJuego.at(n).int2;            //Nivel en el que se encuentra
-    }
     wJ.setGeometry(this->geometry());
-    this->close();                  //Cierra Inicio de sesion/ registro
-    wJ.setVisible(true);            //Muestra ventana de elección de modo de juego
-
-    QMediaPlaylist *playlist = new QMediaPlaylist();
-    playlist->addMedia(QUrl("qrc:/sonidos/nocturnal.mp3"));
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);    //Se genera un loop con la musica de fondo que se desea
-    musica->setPlaylist(playlist);
-    musica->play();
+    this->close();                  //Cierra ventana de elección de la partida de juego
+    wJ.setVisible(true);            //Muestra ventana de juego
+    escena->setBackgroundBrush(Qt::lightGray);
+    juego = new Juego();
 }

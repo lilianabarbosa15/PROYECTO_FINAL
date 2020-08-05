@@ -20,15 +20,16 @@ VentanaModoJuego::~VentanaModoJuego()
 
 void VentanaModoJuego::on_actionSobrePersonajes_triggered()
 {
-    QDialog *dialog = new QDialog;
-    dialog->setWindowIcon(QIcon(":/iconos/iconW_nave.png"));
-    dialog->setWindowTitle("Información de personajes");
-    dialog->setGeometry(this->x(),this->y(),200,200);
+    QDialog *dialog = new QDialog();
+    dialog->setWindowIcon(QIcon(":/iconos/Iconos/iconW_nave.png"));
+    dialog->setWindowTitle("Players information");
+    dialog->setGeometry(this->x(),this->y(),500,500);
+    dialog->setFixedSize(500,500);
+    dialog->setStyleSheet("background-color:black;");
+    dialog->setWindowFlags(dialog->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-                                /*
-                                FALTA CUADRARLO PARA PONERLE LA IMAGEN CORRESPONDIENTE
-                                A LA INFORMACIÓN DE LOS PERSONAJES.
-                                */
+    QLabel *label = new QLabel(dialog);
+    label->setPixmap(QPixmap(":/info/Informacion/Personajes_Desc_.jpg").scaled(500,500));
 
     dialog->setModal(true);
     dialog->setVisible(true);
@@ -52,13 +53,6 @@ void VentanaModoJuego::on_modoIndividual_clicked()
 
 void VentanaModoJuego::cambiarVentana()
 {
-    for(unsigned short int n=0; n<informacionJuego.size(); n++)
-    {
-        qDebug() << informacionJuego.at(n).string1.c_str()  //Indica el modo de juego
-                 << "\t" << informacionJuego.at(n).string2.c_str()  //Nombre del usuario
-                 << "\t" << informacionJuego.at(n).int1     //Puntaje de la partida en curso
-                 << "\t" << informacionJuego.at(n).int2;    //Nivel en el que se encuentra
-    }
     wS.setGeometry(this->geometry());
     this->close();                  //Cierra Inicio de sesion/ registro
     wS.setVisible(true);            //Muestra ventana de elección de modo de juego
