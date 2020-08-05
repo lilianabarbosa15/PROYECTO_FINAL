@@ -1,6 +1,6 @@
 #ifndef VENTANAJUEGO_H
 #define VENTANAJUEGO_H
-
+//Ventana en la que se presentarán los niveles.
 
 #include <QLabel>
 #include <QDialog>

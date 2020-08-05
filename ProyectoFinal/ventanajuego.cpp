@@ -8,10 +8,10 @@ extern Juego *juego;
 VentanaJuego::VentanaJuego(QWidget *parent) : QMainWindow(parent), ui(new Ui::VentanaJuego)
 {
     ui->setupUi(this);
-    playlist->addMedia(QUrl("qrc:/sonidos/Otros recursos/nocturnal.mp3"));
+    playlist->addMedia(QUrl("qrc:/sonidos/Otros recursos/nocturnal.mp3")); //Música de fondo
     playlist->setPlaybackMode(QMediaPlaylist::Loop);    //Se genera un loop con la musica de fondo que se desea
     musica->setPlaylist(playlist);
-    escena = new QGraphicsScene(this);
+    escena = new QGraphicsScene(this); //Nueva escena
     escena->setSceneRect(0,0,680,400);
     ui->Grafica->setScene(escena);
     ui->Grafica->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -27,6 +27,7 @@ VentanaJuego::~VentanaJuego()
 
 void VentanaJuego::on_actionMusica_triggered()
 {
+    //Activar/Desactivar música.
     if(musica->state() == QMediaPlayer::PlayingState)
         musica->stop();
     else
@@ -35,6 +36,7 @@ void VentanaJuego::on_actionMusica_triggered()
 
 void VentanaJuego::on_actionSobrePersonajes_triggered()
 {
+    //Presentar datos sobre los personajes de l historia.
     QDialog *dialog = new QDialog();
     dialog->setWindowIcon(QIcon(":/iconos/Iconos/iconW_nave.png"));
     dialog->setWindowTitle("Players information");
@@ -52,6 +54,7 @@ void VentanaJuego::on_actionSobrePersonajes_triggered()
 
 void VentanaJuego::on_actionInstrucciones_triggered()
 {
+    //Mostrar instrucciones de juego.
     if(juego->getNivel()<5)
     {
         QDialog *dialog = new QDialog();
@@ -72,6 +75,7 @@ void VentanaJuego::on_actionInstrucciones_triggered()
 
 void VentanaJuego::on_actionHistoria_triggered()
 {
+    //Mostrar resumen de la historia del juego.
     if(juego->getNivel()<5)
     {
         QDialog *dialog = new QDialog();
@@ -92,6 +96,7 @@ void VentanaJuego::on_actionHistoria_triggered()
 
 void VentanaJuego::on_inicioJuego_clicked()
 {
+    //Iniciar/ reanudar juego
     if((juego->getNivel()>0 && juego->getNivel()<4) && (juego->estado_juego==false)){
         juego->timer = new QTimer;
         connect(juego->timer,SIGNAL(timeout()),this,SLOT(actualizar()));
@@ -102,6 +107,7 @@ void VentanaJuego::on_inicioJuego_clicked()
 
 void VentanaJuego::on_pausaJuego_clicked()
 {
+    //pausar juego.
     if((juego->getNivel()>0 && juego->getNivel()<4) && (juego->estado_juego==true)){
         juego->timer->stop();
         estado=juego->estado_juego = false;
@@ -115,6 +121,7 @@ void VentanaJuego::actualizar()
 
 bool VentanaJuego::eventFilter(QObject *obj, QEvent *event)
 {
+    //Método para el manejo del teclado con único jugador y multijugador.
     if (!estado)
         return false;
     if((event->type()==QEvent::KeyPress && (juego->getNivel()>0 && juego->getNivel()<4)) && juego->estado_juego==true)
@@ -160,6 +167,7 @@ bool VentanaJuego::eventFilter(QObject *obj, QEvent *event)
 
 void VentanaJuego::keyPressEvent(QKeyEvent *event)
 {
+    //Método para manejo de tecla usada en el paso de las diapositivas de la animación.
     if((event->key()==Qt::Key_X && juego->getA()->getActivado())){
         if(!(juego->estado_juego))
             juego->getA()->Presentar();
