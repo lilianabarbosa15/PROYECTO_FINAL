@@ -3,18 +3,18 @@
 
 extern QGraphicsScene *escena;
 extern Juego *juego;
-//extern Animacion *A;
 
 Juego::Juego(QObject *parent): QObject{parent}
 {
+    //Obtener datos de la partida guardada:
     nombreUsuario = infoUsuario.string2;
     localizacion = infoUsuario.int2;
 
     if(infoUsuario.string1=="<M>") multijugador=J_vivo[1]=true;
     else multijugador=false;
 
-    if(localizacion==1){            //............................Nivel 1
-        A->setActivado(false);
+    if(localizacion==1){            //............................Nivel 1 (Agregando elementos iniciales)
+        A->setActivado(false); //Desactivando animación
         escena->setBackgroundBrush(QBrush(QImage(":/primera/Elementos juego/Spaceport_.jpg").scaled(680,400)));
         vidas=5;
         if(multijugador==true){
@@ -32,8 +32,8 @@ Juego::Juego(QObject *parent): QObject{parent}
             plataformas.push_back(new Plataforma(90,10,n-25,180,0,0,0,5,0));
             escena->addItem(plataformas.back());
         }
-    }else if(localizacion==3){      //............................Nivel 2
-        A->setActivado(false);
+    }else if(localizacion==3){      //............................Nivel 2(Elementos iniciales)
+        A->setActivado(false); //Desactivando animación.
         vidas = 5;
         escena->setBackgroundBrush(QBrush(QImage(":/segunda/Elementos juego/Space.jpg").scaled(680,400)));
         y_nE = 10;
@@ -45,7 +45,7 @@ Juego::Juego(QObject *parent): QObject{parent}
             EnemEstaticos.push_back( new Enemigo(1,2,15,c,y_nE,c+30,60,0,0,0,0,0,10,0));
             escena->addItem(EnemEstaticos.back());
         }
-    }else if(localizacion==5){      //............................Nivel 3
+    }else if(localizacion==5){      //............................Nivel 3(Elementos iniciales)
         A->setActivado(false);
         vidas = 2;
         escena->setBackgroundBrush(QBrush(QImage(":/tercera/Elementos juego/Newplanet.jpg").scaled(680,400)));
@@ -78,6 +78,9 @@ Juego::Juego(QObject *parent): QObject{parent}
 
 void Juego::actualizar()
 {
+    /*
+     * Método para actualizar las posiciones y valores de los elementos del nivel.
+    */
     contTime++;
     AumentarPuntaje();      //Para actualizar el puntaje de los jugadores
 
@@ -89,7 +92,7 @@ void Juego::actualizar()
                 juego->jugadores.at(tipo_a)->actualizarVida(tipo_a);  //¿Algún meteoro chocó con el personaje?
             }
         }
-        for(unsigned short int u=0; u<(unsigned)meteoritos.size(); u++){
+        for(unsigned short int u=0; u<(unsigned)meteoritos.size(); u++){ //Actualizar meteoritos que caen de la parte superior.
             if(meteoritos.at(u)->getPosicionY()<=400){
                 meteoritos.at(u)->ActualizarVelocidad();
                 meteoritos.at(u)->ActualizarPosicion();
@@ -99,7 +102,7 @@ void Juego::actualizar()
             }
         }
         for(int i=0; i<plataformas.size();i++)
-            plataformas.at(i)->Mover();
+            plataformas.at(i)->Mover(); //Mover plataformas.
         for(unsigned short int u=0; u<(unsigned)jugadores.size(); u++){
             if(jugadores.at(u)->posinicialX_barra==60)     //¿Sobre plataforma en movimiento?
                 jugadores.at(u)->actualizarcoordenadas(plataformas.at(1)->getPosY());
@@ -119,7 +122,7 @@ void Juego::actualizar()
         if(contTime%50==0)
             NuevosObstaculos();
 
-        for(int tipo_e=0; tipo_e<EnemEstaticos.size(); tipo_e++){
+        for(int tipo_e=0; tipo_e<EnemEstaticos.size(); tipo_e++){ //Hacer que enemigos en plataformas dispares.
             if(juego->EnemEstaticos.at(tipo_e)->vivo==true && contTime%30==0)
                 EnemEstaticos.at(tipo_e)->disparar();
         }
@@ -127,7 +130,7 @@ void Juego::actualizar()
             for(int tipo_e=0; tipo_e<Enemigos.size(); tipo_e++)
                 juego->Enemigos.at(tipo_e)->actualizarVida();  //¿Algún disparo chocó con una nave enemiga?
         }
-        for(int e=0; e<Enemigos.size(); e++){
+        for(int e=0; e<Enemigos.size(); e++){ //Actualizar posición de enemigos que caen y si estos colisionan con las balas de jugador
             if(Enemigos.at(e)->ActualizarPosicion() || juego->Enemigos.at(e)->vivo==false){
                 Enemigo *enemigo=Enemigos.at(e);
                 escena->removeItem(enemigo);
@@ -161,6 +164,9 @@ void Juego::actualizar()
 
 void Juego::Trackers()
 {
+    /*
+     Método para inicialización de los elementos de texto agregados a la escena para registro de tiempo, puntajes y vidas.
+    */
     Score->setPlainText(QString("Score: ")+QString::number(puntajeNivel));
     Score->setDefaultTextColor(Qt::white);
     Score->setFont(QFont("Book Antiqua", 14));
@@ -192,11 +198,13 @@ void Juego::Trackers()
 
 void Juego::ActualizarCountdown()
 {
+    //Actualizar el tiempo en pantalla
     Time->setPlainText(QString("Time: ")+TimeAsSting());
 }
 
 QString Juego::TimeAsSting()
 {
+    //Obtener tiempo restante. Retorna un QString con el formato M:SS (ejemplo: 1:10, 1:05)
     int minutos=0, segundos=0;
     minutos=((duracion-contTime)/65)/60;
     segundos=((duracion-contTime)/65)%60;
@@ -208,7 +216,11 @@ QString Juego::TimeAsSting()
 
 void Juego::actualizarDisparos()
 {
-    for(unsigned short int bala_j=0; bala_j<(unsigned)disparosAliados.size(); bala_j++){
+    /*
+     Método que actualiza las posiciones de los disparos lanzados por los jugadores y por los enemigos.
+     Adicionalmente revisa colisiones con enemigos y aliados o desaparición de la escena.
+    */
+    for(unsigned short int bala_j=0; bala_j<(unsigned)disparosAliados.size(); bala_j++){ //Actualizar balas aliadas
         for(int tipo_e=0; tipo_e<EnemEstaticos.size(); tipo_e++)
             juego->EnemEstaticos.at(tipo_e)->actualizarVida();  //¿Algún disparo chocó con una nave enemiga?
         if(disparosAliados.at(bala_j)->y()<0 ||
@@ -238,8 +250,11 @@ void Juego::actualizarDisparos()
 
 void Juego::evaluarNivel()
 {
+    /*
+     Método que evalúa requisitos para el cambio de nivel.
+    */
     estado = false;
-    if(juego->getNivel()==1){
+    if(juego->getNivel()==1){ //Requisitos nivel 1
         for(unsigned short int n=0; n<(unsigned)jugadores.size(); n++){
             if(jugadores.at(n)->NivelSuperado==true && jugadores.at(n)->vivo==true){
                 estado = true;
@@ -249,7 +264,7 @@ void Juego::evaluarNivel()
         if(estado==true)
             juego->CambiarLocalizacion();
     }
-    else if(juego->getNivel()==2){
+    else if(juego->getNivel()==2){ //Requisitos nivel 2
         estado=true;
         for(unsigned short int n=0; n<(unsigned)Enemigos.size(); n++){
             if(Enemigos.at(n)->vivo==true){
@@ -260,7 +275,7 @@ void Juego::evaluarNivel()
         if(puntajeNivel>=120 && estado==true)
             juego->CambiarLocalizacion();
     }
-    else if(juego->getNivel()==3){
+    else if(juego->getNivel()==3){ //Requisitos nivel 3
         estado=true;
         for(unsigned short int n=0; n<(unsigned)EnemEstaticos.size(); n++){
             if(EnemEstaticos.at(n)->vivo==true){
@@ -275,6 +290,7 @@ void Juego::evaluarNivel()
 
 void Juego::DisparosEnemigos()
 {
+    //Método que elige al azar enemigos del nivel dos que dispararán.
     if(juego->getNivel()==2)
     {
         int n = rand()%(EnemEstaticos.size());
@@ -290,6 +306,7 @@ void Juego::DisparosEnemigos()
 
 void Juego::DisminuirVidas()
 {
+    //Método que modifica en pantalla las vidas de los jugadores.
     if(jugadores.size()>0){
         Lives1->setPlainText(QString("Lives P1: ")+QString::number(jugadores.at(0)->vidas));
         if(multijugador==true){
@@ -300,15 +317,17 @@ void Juego::DisminuirVidas()
 
 void Juego::AumentarPuntaje()
 {
+    //Método para actualizar el puntaje en pantalla.
     Score->setPlainText(QString("Score: ")+QString::number(puntajeNivel));
 }
 
 void Juego::NuevosObstaculos()
 {
-    if(juego->getNivel()==1){
+    //Método que agrega obstáculos al azar según el nivel.
+    if(juego->getNivel()==1){ //Agrega meteoritos que caen con una velocidad inicial y en ángulo de 3Pi/2.
         meteoritos.push_back(new Meteorito(0,9,(rand() % 650 + 10),0,20));
         escena->addItem(meteoritos.back());
-    }else if(juego->getNivel()==3){
+    }else if(juego->getNivel()==3){ //Añade enemigos que caen en el nivel tres con posición X inicial al azar y ángulo de disparo de 3Pi/2.
         int posX=120+rand()%(451);
         if(contTime%3==0)
             Enemigos.push_back(new Enemigo(4,1,1,posX,0,posX+30,60,posX,0,0,5,3*M_PI_2,4,20));
@@ -320,6 +339,8 @@ void Juego::NuevosObstaculos()
 
 void Juego::ActualizarPuntos()
 {
+    //Método que actualiza las posiciones de las estrellas de los niveles 1 y 2, actualiza el tiempo que permanecen en escena
+    //Y determina si el jugador las alcanza para aumentar el puntaje.
     if(estrellas.size()!=0 && juego->getNivel()<3){ //Actualización de tiempos de monedas
         for(int i=0; i<estrellas.size();i++){
             if(estrellas.at(i)->getTiempo()>0)
@@ -339,6 +360,7 @@ void Juego::ActualizarPuntos()
 
 void Juego::NuevosPuntos()
 {
+    //Método que añade estrellas a la escena según el nivel y con parámetros ajustados a las necesidades.
     if(juego->getNivel()==1 && estrellas.size()==0)
         estrellas.push_back(new Moneda(0,15,10,530,60,0.2,1,duracion));
     else if(juego->getNivel()==1 && estrellas.size()>0)
@@ -350,6 +372,7 @@ void Juego::NuevosPuntos()
 
 int Juego::getNivel()
 {
+    //Método que determina el nivel en el que se encuentra el usuario.
     if(localizacion==1) //Significa que se encuentra en el nivel 1
         return localizacion;
     else if(localizacion==3) //Significa que se encuentra en el nivel 2
@@ -362,6 +385,7 @@ int Juego::getNivel()
 
 void Juego::ReiniciarNivel()
 {
+    //Método que limpia la escena de juego e inicia uno nuevo.
     J_vivo[0]=J_vivo[1]=false;
     escena->clear();
     timer->stop();
@@ -369,8 +393,9 @@ void Juego::ReiniciarNivel()
     juego = new Juego();
 }
 
-void Juego::CambiarLocalizacion()               //HAY QUE REVISAR
+void Juego::CambiarLocalizacion()
 {
+    //Método para almacenamiento de la información al cambiar de nivel y para comenzar el nuevo nivel.
     if(localizacion==5){
         //Actualiza la puntuación local (se guardan los puntajes y los niveles en el archivo de los usuarios del sistema)
         infoUsuario.int1 += puntajeNivel;

@@ -1,6 +1,9 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+/*
+ * Clase usa para el manejo de los elementos del juego.
+*/
 
 #include <QGraphicsRectItem>
 #include "animacion.h"
@@ -19,6 +22,7 @@ class Juego: public QObject
 {
     Q_OBJECT
 private:
+    //Manejo de items de texto mostrados al usuario
     QString TimeAsSting();
     void ActualizarCountdown();
     void actualizarDisparos();
@@ -27,7 +31,8 @@ private:
 public:
     Juego(QObject *parent=nullptr);
 
-    void actualizar();
+    void actualizar(); //Actualización de los objetos del juego.
+    //Métodos que añaden objetos al juego.
     void Trackers();
     void DisparosEnemigos();
     void DisminuirVidas();
@@ -35,6 +40,7 @@ public:
     void NuevosPuntos();
     void NuevosObstaculos();
     void ActualizarPuntos();
+    //Métodos para la conexión de niveles.
     void ReiniciarNivel();
     void CambiarLocalizacion();
     int getNivel();
@@ -60,6 +66,7 @@ public:
     QTimer *timer;                                      //Crea el timer
 
     Animacion *getA() const;
+    //Contenedores para almacenar los elementos del juego
     QVector<Aliado *> jugadores = {};
     QVector<Enemigo*> Enemigos = {};
     QList<Enemigo*> EnemEstaticos = {};

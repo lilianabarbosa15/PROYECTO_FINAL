@@ -1,6 +1,8 @@
 #ifndef ESCRITOR_H
 #define ESCRITOR_H
-
+/*
+ Clase usada para el manejo de archivos.
+*/
 #include <QList>
 #include <QMessageBox>
 #include "informacion.h"
