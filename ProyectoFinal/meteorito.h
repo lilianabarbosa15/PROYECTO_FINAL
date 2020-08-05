@@ -11,10 +11,8 @@
 
 class Meteorito: public QObject, public QGraphicsItem
 {
-    /* Clase que se utilizara para los meteoritos del nivel 2 y los disparos del nivel3:
-      El tipo 1 corresponde a los meteoritos y el tipo 2 corresponde a los disparos.
-      El cuerpo se movera siguiendo las ecuaciones de movimiento rectilineo uniformemente
-      acelerado.
+    /* Clase que se utilizará para los disparos en el juego.
+      El cuerpo se movera siguiendo las ecuaciones de movimiento parabólico.
       Para el caso de los meteoritos se desea que se muevan de manera rectilinea y desacelerada
       por lo que al implementar la clase no es necesario introducir el angulo inicial ya que
       por default se ha determinado el angulo de 3*PI/2 (radianes) que produce un movimiento
@@ -22,11 +20,13 @@ class Meteorito: public QObject, public QGraphicsItem
       Con el metodo setAceleracion puede variarse la aceleracion default de 9,8 (m/s2)
       a una aceleracion negativa para que el cuerpo desacelere al caer. Sin embargo es posible
       que este cambio de aceleracion cause comportamientos extraños como un periodo de movimiento
-      hacia abajo y otro periodo hacia arriba por lo que se cambiara la velocidad a conveniencia.
-      (Por probar: utilizar mejor friccion o resistencia del aire y no variar la aceleracion).
+      hacia abajo y otro periodo hacia arriba por lo que se debe cambiar la velocidad a conveniencia.
+
       Para el caso del meteorito se recomienda ingresar angulos que se encuentren en el rango
-      [0,2PI] (radianes)para obtener un movimiento parabolico (Por probar: rebote del cuerpo al chocar
-      con otros cuerpos)
+      [0,2PI] (radianes)para obtener un movimiento parabolico.
+
+      Para el tipo de meteorito que rebota se debe variar el coeficiente de restitución para variar la altura
+      de los rebotes. En el caso del nivel 3 el coeficiente es menor a 1 para que se observe una pérdida de energía.
     */
     Q_OBJECT
 private:
@@ -34,7 +34,7 @@ private:
     double angulo=0, radio=0;
     double a=9.8,delta=0.1;      //delta: cambio en el tiempo (variar segun timer para mayor o
                                  //menor velocidad de la animacion)
-    double coefRestitucion=0.65;    //0.9;
+    double coefRestitucion=0.65;
     unsigned int contRebote=0;      //para implementacion de rebotes
     unsigned int tipo=0;
     QTimer *timer= new QTimer;

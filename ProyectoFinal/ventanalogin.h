@@ -1,6 +1,6 @@
 #ifndef VENTANALOGIN_H
 #define VENTANALOGIN_H
-
+//Ventana de inicio de sesión.
 #include "ventanamodojuego.h"
 #include <QMainWindow>
 #include <QIcon>

@@ -15,9 +15,9 @@ Plataforma::Plataforma(double _ancho, double _alto, double x_inicial, double y_i
     alto=_alto;
     FrictionC=friccion;
     if(tipo!=1)
-        apariencia = QPixmap(":/primera/Elementos juego/Platform.png").scaled(ancho,alto);
+        apariencia = QPixmap(":/primera/Elementos juego/Platform.png").scaled(ancho,alto); //Plataforma nivel 1
     else
-        apariencia = QPixmap(":/tercera/Elementos juego/Platform3.png").scaled(ancho,alto); //La otra apariencia de la plataforma
+        apariencia = QPixmap(":/tercera/Elementos juego/Platform3.png").scaled(ancho,alto); //Plataforma nivel 2
     setPos(posX*0.0001,posY*0.0001);
 }
 
@@ -36,7 +36,7 @@ void Plataforma::Mover()
         velY=-velY;
         contPos=0;
     }
-    setPos(posX*0.0001,posY*0.0001);
+    setPos(posX*0.0001,posY*0.0001); //Ajuste de escala.
 }
 
 QRectF Plataforma::boundingRect() const
@@ -62,6 +62,7 @@ int Plataforma::getAncho() const
 
 void Plataforma::ColisionBala()
 {
+    //Método que evalúa si la bala del aliado choca con la plataforma.
     QList<QGraphicsItem*>Colision=collidingItems();
     for(int i=0; i<Colision.size();i++){
         if(typeid(*Colision.at(i))==typeid(Bala)){

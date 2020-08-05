@@ -1,6 +1,8 @@
 #ifndef CUERPOANIM_H
 #define CUERPOANIM_H
-
+/*
+Clase utilizada en la animación de movimiento planetario (animación nivel 3).
+*/
 
 #include <QObject>
 #include <QGraphicsEllipseItem>

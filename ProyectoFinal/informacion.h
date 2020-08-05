@@ -22,8 +22,8 @@ struct infoArchivo
 */
     string string1;
     string string2;
-    unsigned long int int1; //unsigned int int1;
-    unsigned long int int2; //unsigned short int int2;
+    unsigned long int int1;
+    unsigned long int int2;
 };
 
 #endif // INFORMACION_H

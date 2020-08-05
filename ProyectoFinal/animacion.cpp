@@ -127,6 +127,12 @@ void Animacion::AnimacionFinal()
 
 void Animacion::Presentar()
 {
+    /*Método que determina qué animación presentar según el nivel actual del juego.
+     * Nivel 0-> animación antes de nivel 1.
+     * Nivel 2-> Animación antes de nivel 2
+     * Nivel 4->Animación antes de nivel 3
+     * Nivel 6->Animación final
+     */
     if(nivel==0)
         AnimacionNivel1();
     else if(nivel==2)
@@ -139,6 +145,7 @@ void Animacion::Presentar()
 
 void Animacion::actualizar()
 {
+    //Slot que actualiza las posiciones de los cuerpos de la animación del nivel 3 según movimiento planetario.
     planetas.clear();
     planetas.push_back(uno);
     planetas.push_back(dos);

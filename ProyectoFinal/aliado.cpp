@@ -8,6 +8,7 @@ extern Juego *juego;
 
 Aliado::Aliado(int tipo, unsigned short int life)      // tipo: 1 o 2 astronautas del nivel 1, 3 o 4 a naves, 5 o 6 astronautas del nivel 3.
 {
+    //Constructor: define qué tipo de jugador será dibujado en escena y de cuántas vidas se dispondrá.
     jugador = tipo;
     vidas = life;
     dibujarItem();
@@ -15,6 +16,14 @@ Aliado::Aliado(int tipo, unsigned short int life)      // tipo: 1 o 2 astronauta
 
 void Aliado::dibujarItem()
 {
+    /*
+     Método para dibujar el jugador en escena inicialmente.
+     Tipos:
+     1 y 2: jugadores del nivel 1.
+     3 y 4: jugadores del nivel 2.
+     5 y 6: jugadores del nivel 3.
+    */
+
     if(jugador == 1){
         aparienciaR = QPixmap(":/aliado/Elementos juego/Astronaut_Right_01.png");
         aparienciaL = QPixmap(":/aliado/Elementos juego/Astronaut_Left_01.png");
@@ -67,16 +76,18 @@ void Aliado::calcularmovimiento(int evento)
 
 void Aliado::moverX(int evento)
 {
+    //Método para el movimiento del jugador en el eje X. En este movimiento se introduce fricción que afecta la velocidad
+    //del movimiento.
     pixX+=33;
     if(pixX>165)
         pixX=0;
 
-    if(evento==Qt::Key_A){
+    if(evento==Qt::Key_A){ //Movimiento a la izquierda.
         if(juego->getNivel()!=2)
             setPixmap(aparienciaL.copy(pixX,pixY,ancho+8,alto));
         posicion_x-=(paso-friccion);
     }
-    if(evento==Qt::Key_S){
+    if(evento==Qt::Key_S){ //Movimiento a la derecha.
         if(juego->getNivel()!=2)
             setPixmap(aparienciaR.copy(pixX,pixY,ancho+8,alto));
         posicion_x+=(paso-friccion);
@@ -86,6 +97,8 @@ void Aliado::moverX(int evento)
 
 void Aliado::moverY(unsigned short tipo)    //SOLO SE USA EN EL NIVEL 1
 {
+    //Método para el movimiento en el eje Y del jugador. Se implementa movimiento parabólico para los saltos
+    //y las caídas de las plataformas.
     if(tipo==1 && ((juego->getPlataformas().at(barra)->getPosX()<=this->x()+ancho) &&
        (juego->getPlataformas().at(barra)->getPosX()+juego->getPlataformas().at(barra)->getAncho()>this->x()))){
         Vy=velocidad*sin(theta)-Gravedad*tiempo;
@@ -102,7 +115,7 @@ void Aliado::moverY(unsigned short tipo)    //SOLO SE USA EN EL NIVEL 1
         verificarMovimiento();
     }
     else{
-        Vy=-2.5*Gravedad*tiempo;    //Le puse un x2.5 para que caiga más rápido
+        Vy=-2.5*Gravedad*tiempo;    //2.5 para que caiga más rápido
         posicion_y-=Vy*tiempo-(0.5*Gravedad*tiempo*tiempo);
         verificarMovimiento();
     }
@@ -110,6 +123,7 @@ void Aliado::moverY(unsigned short tipo)    //SOLO SE USA EN EL NIVEL 1
 
 void Aliado::actualizarcoordenadas(int posY_barra)  //SOLO SE USA EN EL NIVEL 1
 {
+    //Método para actualización de las coordenadas del jugador segúnsu posición respecto a las plataformas.
     if((juego->getPlataformas().at(barra)->getPosX()<=this->x()+ancho))
     {
         posicion_y = posicioninicial_y = (posY_barra-alto);
@@ -117,7 +131,7 @@ void Aliado::actualizarcoordenadas(int posY_barra)  //SOLO SE USA EN EL NIVEL 1
     }
 }
 
-void Aliado::moverArma(float posibleangulo, int direccion)
+void Aliado::moverArma(float posibleangulo, int direccion) //USADO EN EL NIVEL 3
 {
     //Dependiendo de la tecla presionada mueve el arma y la posición de ella respecto al jugador
     if(direccion == Qt::Key_R){
@@ -138,7 +152,9 @@ void Aliado::moverArma(float posibleangulo, int direccion)
 
 void Aliado::disparar()
 {
-    //Si se encuentra en el nivel 3 se ejecuta la primera serie de instrucciones
+    //Si se encuentra en el nivel 3 se ejecuta la primera serie de instrucciones.
+    //Se añade a la escena una nueva bala con un ángulo según la posición del arma(nivel 3) o con un ángulo
+    //de 90° (nivel 2).
     if(juego->getNivel()==3)
     {
         for(int j=0;j<8;j++){
@@ -166,6 +182,8 @@ void Aliado::disparar()
 
 bool Aliado::ColisionBala()
 {
+    //Método que analiza si el jugador ha colisionado con un meteorito (disparo del enemigo) y de ser así retorna true.
+    //de lo contrario retorna false.
     QList<QGraphicsItem*>Colision=collidingItems();
     for(int i=0; i<Colision.size();i++){
         if(typeid(*Colision.at(i))==typeid(Meteorito)){
@@ -178,6 +196,10 @@ bool Aliado::ColisionBala()
 
 void Aliado::actualizarVida(unsigned short tipoaliado)
 {
+    /*Método que analiza si el jugador aún posee vidas.
+     * Si se presenta una colisión con bala se disminuirán las vidas y si ya no se tienen vidas se eliminará al jugador
+     * de la escena.
+    */
     if(vidas==0){
         this->hide();
         if(juego->J_vivo[tipoaliado]==true){
@@ -194,6 +216,7 @@ void Aliado::actualizarVida(unsigned short tipoaliado)
 
 void Aliado::verificarMovimiento()
 {
+    //Método para verificar validez del movimiento del jugador en la escena y con respeco a las plataformas.
     if(juego->getNivel()==1){    //SOLO SE USA EN EL NIVEL 1
         colision_barra = false;
         posinicialY_barra = 400;
@@ -227,6 +250,7 @@ void Aliado::verificarMovimiento()
 
 void Aliado::verificarChoques(unsigned short int tipo)
 {
+    //Método que verifica si el jugador del nivel 1 ha colisionado con alguna plataforma.
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for(int i=0, n=colliding_items.size(); i<n; i++){
         if((typeid(*(colliding_items[i]))==typeid (Plataforma)) && tipo==1){    //SOLO SE USA EN EL NIVEL 1
@@ -235,7 +259,7 @@ void Aliado::verificarChoques(unsigned short int tipo)
             for(unsigned int i=0; i<(unsigned)juego->getPlataformas().size(); i++){
                 if(juego->getPlataformas().at(i)->getPosX() == posinicialX_barra){
                     barra = i;
-                    friccion = juego->getPlataformas().at(barra)->getFrictionC();
+                    friccion = juego->getPlataformas().at(barra)->getFrictionC(); //Se obtiene fricción con la plataforma
                     break;
                 }
             }

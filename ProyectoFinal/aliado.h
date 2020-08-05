@@ -1,6 +1,8 @@
 #ifndef ALIADO_H
 #define ALIADO_H
 
+//Clase para creación de los jugadores de todos los niveles. Hereda, junto con enemigo, de la clase cuerpo.
+
 #include <QGraphicsPixmapItem>
 #include <QGraphicsRectItem>
 #include <QMediaPlayer>
@@ -58,7 +60,7 @@ private:
     int indica_posicion_arma = 4;
     QPixmap aparienciaR, aparienciaL;
     QPixmap aparienciaG;
-    Bala *bala;
+    Bala *bala; //Disparo tipo bala
 
 };
 

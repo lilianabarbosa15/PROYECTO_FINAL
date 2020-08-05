@@ -14,8 +14,8 @@ class Plataforma: public QGraphicsItem
    * condición de cambio de velocidad que el caso anterior.
    * Cada plataforma tendrá un coeficiente de fricción con respecto a los personajes del juego
    * (será constante para todos los personajes).
-   * Para que la plataforma se mueva de manera horizontal debe implementarse la clase con velY=0
-   * y para que se mueva de manera vertical con Vx=0, de lo contrario se moverá con un ángulo.
+   * Para que la plataforma se mueva de manera horizontal debe instanciar el objeto con velY=0
+   * y para que se mueva de manera vertical con Vx=0, de lo contrario se moverá en diagonal.
    */
 private:
     unsigned int contPos=0, maxAvance=0;

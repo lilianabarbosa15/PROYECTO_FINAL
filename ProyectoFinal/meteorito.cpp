@@ -9,6 +9,7 @@ extern Juego *juego;
 
 Meteorito::Meteorito(unsigned int _tipo, double _radio, double X, double Y, double _V0, double _angulo, QObject *parent): QObject{parent}
 {
+
     tipo=_tipo;
     radio=_radio;
     posX=X;
@@ -37,11 +38,13 @@ QRectF Meteorito::boundingRect() const
 
 void Meteorito::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    //dibujando meteorito según el tipo y tamaño delimitado por boundingRect()
     painter->drawPixmap(boundingRect(),apariencia,apariencia.rect());
 }
 
 bool Meteorito::rebotar()
 {
+    //Método que implementa el rebote. Se cambia la dirección de la velocidad en y (pues rebote será con parte inferior de la escena)
     if(contRebote<2){
         Vy=-Vy;
         V0=V0*coefRestitucion;
@@ -109,6 +112,10 @@ double Meteorito::getCoefRestitucion() const
 
 bool Meteorito::Colision()
 {
+    /*
+     * Método que determina si el meteorito colisiona con una plataforma. En caso de hacerlo retorna true, de lo contrario retorna
+     * false.
+    */
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for(int i=0, n=colliding_items.size(); i<n; i++){
         if((typeid(*(colliding_items[i]))==typeid (Plataforma))){
@@ -120,6 +127,10 @@ bool Meteorito::Colision()
 
 bool Meteorito::Mover()
 {
+    /*
+     * Método para mover el meteorito. Si colisiona, no puede rebotar más o llega a la parte inferior de la escena, retorna true.
+     * De lo contrario actualiza su velocidad y posición.
+    */
     if(Colision()==true){
         if(rebotar()==false)
             return true; //Hay que eliminarlo
