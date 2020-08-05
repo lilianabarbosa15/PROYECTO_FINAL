@@ -1,0 +1,56 @@
+<RCC>
+    <qresource prefix="/comic">
+        <file>Comic/N1_1.png</file>
+        <file>Comic/N1_2.png</file>
+        <file>Comic/N1_3.png</file>
+        <file>Comic/N1_4.png</file>
+        <file>Comic/N1_5.png</file>
+        <file>Comic/N1_6.png</file>
+        <file>Comic/N1_7.png</file>
+        <file>Comic/N1_8.png</file>
+        <file>Comic/N1_8_2.png</file>
+        <file>Comic/N1_8_2_2.png</file>
+        <file>Comic/N1_8_3.png</file>
+        <file>Comic/N1_8_4.png</file>
+        <file>Comic/N1_9.png</file>
+        <file>Comic/N1_11.png</file>
+        <file>Comic/N1_12.png</file>
+        <file>Comic/N1_13.png</file>
+        <file>Comic/N1_14.png</file>
+        <file>Comic/N1_15.png</file>
+        <file>Comic/N2_1.png</file>
+        <file>Comic/N2_2.png</file>
+        <file>Comic/N2_3.png</file>
+        <file>Comic/N2_4.png</file>
+        <file>Comic/N2_5.png</file>
+        <file>Comic/N2_6.png</file>
+        <file>Comic/N2_7.png</file>
+        <file>Comic/N2_8.png</file>
+        <file>Comic/N2_9.png</file>
+        <file>Comic/N2_10.png</file>
+        <file>Comic/N2_11.png</file>
+        <file>Comic/N3_1.png</file>
+        <file>Comic/N3_2.png</file>
+        <file>Comic/N3_3.png</file>
+        <file>Comic/N3_4.png</file>
+        <file>Comic/N3_6.png</file>
+        <file>Comic/N3_7.png</file>
+        <file>Comic/N3_8.png</file>
+        <file>Comic/N3_9.png</file>
+        <file>Comic/N3_10.png</file>
+        <file>Comic/N3_11.png</file>
+        <file>Comic/N4_1.png</file>
+        <file>Comic/N4_2.png</file>
+        <file>Comic/N4_3.png</file>
+        <file>Comic/N4_4.png</file>
+        <file>Comic/N4_5.png</file>
+        <file>Comic/N4_6.png</file>
+        <file>Comic/N4_7.png</file>
+        <file>Comic/N4_8.png</file>
+        <file>Comic/N4_9.png</file>
+    </qresource>
+    <qresource prefix="/simulacion">
+        <file>Simulacion del comic/planeta animacion.png</file>
+        <file>Simulacion del comic/sol animacion.png</file>
+    </qresource>
+</RCC>
