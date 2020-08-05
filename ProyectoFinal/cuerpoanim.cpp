@@ -5,6 +5,7 @@
 
 CuerpoAnim::CuerpoAnim(double _masa,double _PX,double _PY,double _VX,double _VY)
 {
+    //Constructor. Se define la constante gravitacional, la masa del cuerpo y se obtienen valores iniciales de posición y velocidad.
     G=0.00000006673;
     masa=_masa;
     PX=_PX;
@@ -17,6 +18,7 @@ CuerpoAnim::CuerpoAnim(double _masa,double _PX,double _PY,double _VX,double _VY)
 
 void CuerpoAnim::actualizar()
 {
+    //Actualización de posición del cuerpo según ecuaciones de para movimiento planetario.
     for(int i=0;i<planetas.size();i++){
         if(planetas[i]!=this){
             masa2=planetas[i]->getMasa();
