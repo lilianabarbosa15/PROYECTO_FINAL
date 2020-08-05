@@ -2,6 +2,7 @@
 #define VENTANAMODOJUEGO_H
 
 #include <QMainWindow>
+#include <QLabel>
 #include "ventanaseleccionjuego.h"
 
 namespace Ui { class VentanaModoJuego; }
@@ -21,9 +22,11 @@ private slots:
     void on_modoIndividual_clicked();
 
 private:
+    void cambiarVentana();
+
+private:
     Ui::VentanaModoJuego *ui;
 
-    void cambiarVentana();
 };
 
 #endif // VENTANAMODOJUEGO_H

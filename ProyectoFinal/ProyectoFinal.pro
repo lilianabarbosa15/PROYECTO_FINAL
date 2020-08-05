@@ -24,23 +24,36 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+        aliado.cpp \
+        animacion.cpp \
+        cuerpoanim.cpp \
+        enemigo.cpp \
         escritor.cpp \
+        juego.cpp \
         main.cpp \
         moneda.cpp \
         plataforma.cpp \
         meteorito.cpp \
+        puntaje.cpp \
         ventanajuego.cpp \
         ventanalogin.cpp \
         ventanamodojuego.cpp \
         ventanaseleccionjuego.cpp
-    
 
 HEADERS += \
+        aliado.h \
+        animacion.h \
+        bala.h \
+        cuerpo.h \
+        cuerpoanim.h \
+        enemigo.h \
         escritor.h \
+        informacion.h \
+        juego.h \
         moneda.h \
         plataforma.h \
         meteorito.h \
-        informacion.h \
+        puntaje.h \
         ventanajuego.h \
         ventanalogin.h \
         ventanamodojuego.h \
@@ -53,4 +66,8 @@ FORMS += \
         ventanaseleccionjuego.ui
 
 RESOURCES += \
-    rec.qrc
+    detalles.qrc \
+    escenas.qrc \
+    historia.qrc \
+    rec.qrc \
+    sprites.qrc
