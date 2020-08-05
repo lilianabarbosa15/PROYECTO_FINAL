@@ -1,6 +1,10 @@
 #ifndef ANIMACION_H
 #define ANIMACION_H
-
+/*
+Clase para implementación de presentación de imágenes de la historia del juego.
+Se hereda de QObject para uso de un timer en animación del nivel 3 en el que es usado
+el movimiento planetario.
+*/
 
 #include<QVector>
 #include<QString>
@@ -31,7 +35,7 @@ private:
 
     QVector<QString>Final={"N4_1.png","N4_2.png","N4_3.png","N4_4.png", "N4_5.png","N4_6.png","N4_7.png",
                            "N4_8.png","N4_9.png"};
-    QPixmap slide; //qpixmap que almacena la imágen
+    QPixmap slide; //qpixmap que almacena la imagen
     QGraphicsPixmapItem *item;
     /*intervalo:intervalo de tiempo que se animará la gravitación si usuario no
      * presiona la tecla.
@@ -49,7 +53,6 @@ private:
     QTimer *timer;
     int dt=1;   //Velocidad de los cuerpos en orbita
      //Cuerpos a animar: Revisar datos para mejor animación.
-     //QVector<CuerpoAnim *>Cuerpos={cuerpo1, cuerpo2};
 
 public:
      Animacion(QObject *parent=nullptr);
