@@ -60,7 +60,7 @@ private:
     int indica_posicion_arma = 4;
     QPixmap aparienciaR, aparienciaL;
     QPixmap aparienciaG;
-    Bala *bala;
+    Bala *bala; //Disparo tipo bala
 
 };
 

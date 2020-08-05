@@ -6,6 +6,10 @@ extern Juego *juego;
 
 Enemigo::Enemigo(unsigned int tipo, unsigned short int tipo_b, unsigned short life, int posX, int posY, int posX_arma, int posY_arma, int pos_inicialX, int pos_inicialY, float vel, float a, float theta_disparo, int radio_bala, float vel_bala)
 {
+    /*
+     * Constructor que obtiene el tipo de enemigo con sus valores iniciales de vidas y posiciones, así como parámetros
+     * para el disparo.
+    */
     enemigo = tipo;
     disparo = tipo_b;
     vidas = life;
@@ -24,6 +28,12 @@ Enemigo::Enemigo(unsigned int tipo, unsigned short int tipo_b, unsigned short li
 
 void Enemigo::dibujarItem()
 {
+    /*
+     Método que dibuja el enemigo según sea su tipo:
+     1->enemigo nivel 2.
+     2 y 3-> enemigos en plataformas del nivel 3.
+     4 y 5-> enemigos que caen en el nivel 3.
+    */
     if(enemigo==1){    //Naves
         apariencia = QPixmap(":/Enemigo/Elementos juego/SpaceshipE.png").scaled(ancho,alto);
     }
@@ -48,6 +58,10 @@ void Enemigo::dibujarItem()
 
 void Enemigo::disparar()
 {
+    /*
+     Método para realizar el disparo. Según el tipo de enemigo se decide el tipo de meteorito a disparar.
+     Se modifica el valor de la aceleración según sea necesario para el movimiento del meteorito en el nivel.
+    */
     if(enemigo==1)
         bala = new Meteorito(2,radio_b,posicionX_arma,posicionY_arma,velocidad_b, angulo_b);
     else if(enemigo==2 || enemigo==3)
@@ -64,8 +78,13 @@ void Enemigo::disparar()
     scene()->addItem(bala);
 }
 
-bool Enemigo::ActualizarPosicion()
+bool Enemigo::ActualizarPosicion() //NIVEL 3
 {
+    /*
+     Método para modificar la posición en Y de los enemigos que caen en el nivel 3.
+     Esto se realiza según las ecuaciones de movimiento rectilíneo uniformemente acelerado.
+     Retorna true si el enemigo ha llegado a la parte inferior de la escena y false en caso contrario.
+    */
     if(posicion_y<400){
         posicion_y+=velocidad+(aceleracion/2);
         posicionY_arma=posicion_y+alto;
@@ -78,6 +97,10 @@ bool Enemigo::ActualizarPosicion()
 
 bool Enemigo::ColisionBala()
 {
+    /*
+     Método que verifica si el enemigo ha chocado con una bala lanzada por el jugador.
+     De ser así retorna true y de lo contrario retorna false.
+    */
     QList<QGraphicsItem*>Colision=collidingItems();
     for(int i=0; i<Colision.size();i++){
         if(typeid(*Colision.at(i))==typeid(Bala)){
@@ -90,6 +113,11 @@ bool Enemigo::ColisionBala()
 
 void Enemigo::actualizarVida()
 {
+    /*
+     Método que verifica si el enemigo se mantiene con vida.
+     Si este ha colisionado con una bala pero aún tiene vidas entonces estas se disminuyen.
+     Si ya no se tiene vidas entonces se aumenta el puntaje del nivel en 10 puntos y se elimina de la escena.
+    */
     if(vidas==0){
         this->hide();
         if(vivo==true){

@@ -1,6 +1,8 @@
 #ifndef ENEMIGO_H
 #define ENEMIGO_H
-
+/*
+ Clase para crear los enemigos de cada nivel. Hereda de la clase cuerpo.
+*/
 
 #include <QGraphicsRectItem>
 #include "cuerpo.h"
@@ -33,13 +35,14 @@ private:
     int posicionX_arma;
     int posicionY_arma;
     int posX=0,posY=0;
+    //Valores para los disparos:
     int radio_b;
-    float velocidad;
     float aceleracion;
+    float velocidad;
     float angulo_b;
     float velocidad_b;
 
-    Meteorito *bala;
+    Meteorito *bala; //Disparo tipo meteorito.
     QPixmap apariencia;
 
 };
