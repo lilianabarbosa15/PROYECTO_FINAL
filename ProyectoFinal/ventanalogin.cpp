@@ -23,6 +23,7 @@ VentanaLogin::~VentanaLogin()
 
 void VentanaLogin::on_nuevoUsuario_clicked()
 {
+    //Creación de nuevo usuario.
     name_ingresado = (ui->name->text()).toStdString();
     password_ingresado = (ui->password->text()).toStdString();
 
@@ -52,6 +53,7 @@ void VentanaLogin::on_nuevoUsuario_clicked()
 
 void VentanaLogin::on_existeUsuario_clicked()
 {
+    //Inicio de sesión con usuario registrado.
     name_ingresado = (ui->name->text()).toStdString();
     password_ingresado = (ui->password->text()).toStdString();
 
@@ -82,6 +84,7 @@ void VentanaLogin::on_existeUsuario_clicked()
 
 bool VentanaLogin::verificarDato()
 {
+    //Verificación de validez de input.
     if(password_ingresado!="" && name_ingresado!=""){
         for(unsigned short int v=0; v< sizeof(v_evaluar); v++){  //Verifica nombre
             for(unsigned int n=0; n<name_ingresado.size(); n++){
@@ -101,6 +104,7 @@ bool VentanaLogin::verificarDato()
 
 void VentanaLogin::cambiarVentana()
 {
+    //Cambiar a ventana de modo jugador.
     infoUsuario.string2 = name_ingresado;
     informacionJuego = Escritor().leerArchivo(infoUsuario.string2 + "_usu");
 
@@ -112,12 +116,14 @@ void VentanaLogin::cambiarVentana()
 
 void VentanaLogin::on_actionNombresValidos_triggered()
 {
+    //Nombres de usuario válidos.
     msgBox.setText("Names cannot contain spaces or any of the following characters:\n |/<>*?*:\"\\");
     msgBox.exec();
 }
 
 void VentanaLogin::on_actionClavesValidas_triggered()
 {
+    //Contraseñas válidas.
     msgBox.setText("All passwords are valid except those containing spaces");
     msgBox.exec();
 }

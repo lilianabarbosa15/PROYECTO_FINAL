@@ -1,6 +1,7 @@
 #ifndef VENTANAMODOJUEGO_H
 #define VENTANAMODOJUEGO_H
 
+//Venta que determina el modo de juego (individual o multijugador)
 #include <QMainWindow>
 #include <QLabel>
 #include "ventanaseleccionjuego.h"
