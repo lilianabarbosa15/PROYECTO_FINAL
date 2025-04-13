@@ -1,6 +1,6 @@
 # PROYECTO_FINAL
 Desarrollaremos un videojuego
 
-Liliana Barbosa Esteban. C.C 1005029129
+Liliana Barbosa Esteban.
 
-Andrea Ospina Hincapié. C.C 1000645980
+Andrea Ospina Hincapié.
